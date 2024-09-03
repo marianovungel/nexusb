@@ -25,11 +25,20 @@ router.post('/singUp', async (req, res) => {
   }else{
     let user = await userModel.create({
     username:username,
-    nema: username,
+    name: username,
     email:email,
-    phone:phone,
     userid:userId,
-    avatar:avatar
+    avatar:avatar,
+    littes:"",
+    interece:"",
+    formacaoSuperior:"",
+    formacaomedio:"",
+    formacaoGrau:"",
+    areaFormacao:"",
+    desc:"",
+    facebook:"",
+    linkedin:"",
+    insta:"",
     })
     res.json({ success: true, message: "User created seccessfully!", userId: user._id})
   }

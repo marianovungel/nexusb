@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/singUp', async (req, res) => {
   
-  let { email, phone, username, userId} = req.body;
+  let { email, phone, username, userId, avatar} = req.body;
   let emailCon = await userModel.findOne({ email: email});
   let phoneCon = await userModel.findOne({ phone: phone});
 
@@ -28,7 +28,8 @@ router.post('/singUp', async (req, res) => {
     nema: username,
     email:email,
     phone:phone,
-    userid:userId
+    userid:userId,
+    avatar:avatar
     })
     res.json({ success: true, message: "User created seccessfully!", userId: user._id})
   }

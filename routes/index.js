@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/singUp', async (req, res) => {
   
-  let { name, email, password, phone, username} = req.body;
+  let { email, phone, username, userId} = req.body;
   let emailCon = await userModel.findOne({ email: email});
   let phoneCon = await userModel.findOne({ phone: phone});
 
@@ -23,20 +23,14 @@ router.post('/singUp', async (req, res) => {
   } else if (phoneCon) {
     return res.json({ sucess: false, message: "Phone number already exist!"})
   }else{
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(password, salt, async function(err, hash) {
-        if(err) throw err;
-        let user = await userModel.create({
-          username:username,
-          nema: name,
-          email:email,
-          phone:phone,
-          password:hash
-        })
-        res.json({ success: true, message: "User created seccessfully!", userId: user._id})
-      });
-    });
-    
+    let user = await userModel.create({
+    username:username,
+    nema: username,
+    email:email,
+    phone:phone,
+    userid:userId
+    })
+    res.json({ success: true, message: "User created seccessfully!", userId: user._id})
   }
   
 });

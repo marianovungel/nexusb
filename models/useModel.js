@@ -1,11 +1,21 @@
 var mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
+    userid:String,
     name:String,
     email:String,
-    password:String,
     phone:String,
+    littes:String,
     username:String,
+    interece:String,
+    formacaoSuperior:String,
+    formacaomedio:String,
+    formacaoGrau:String,
+    areaFormacao:String,
+    desc:String,
+    facebook:String,
+    linkedin:String,
+    insta:String,
     isBlocked:{
         type:Boolean,
         default: false

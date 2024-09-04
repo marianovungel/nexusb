@@ -13,24 +13,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/singUp', async (req, res) => {
-  
-  let { email, phone, username, userId, avatar} = req.body;
-  let emailCon = await userModel.findOne({ email: email});
-  let phoneCon = await userModel.findOne({ phone: phone});
+  try{
 
-  if (emailCon) {
-    return res.json({ sucess: false, message: "Email already exist!"})
-  } else if (phoneCon) {
-    return res.json({ sucess: false, message: "Phone number already exist!"})
-  }else{
-    let user = await userModel.create({
-    username:username,
-    name: username,
-    email:email,
-    userid:userId,
-    avatar:avatar,
-    })
+    let { email,  username, userId, avatar} = req.body;
+    const nerUser = new userModel({
+      username:username,
+      name: username,
+      email:email,
+      userid:userId,
+      avatar:avatar,
+    });
+
+    const user = await nerUser.save();
     res.json({ success: true, message: "User created seccessfully!", userId: user._id})
+  }catch(err){
+      res.status(500).json(err);
   }
   
 });

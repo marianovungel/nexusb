@@ -141,4 +141,27 @@ router.post('/use', async (req, res) => {
   }
 });
 
+router.get('/search:key', async (req, res) => {
+  try {
+    const result = await userModel.aggregate(
+      [
+        {
+          $search: {
+            index: "nexus",
+            text: {
+              query: req.params.key,
+              path: {
+                wildcard: "*"
+              }
+            }
+          }
+        }
+      ]
+    )
+    return res.json({ success: true, message: "Success!", users: result});
+  } catch (error) {
+    return res.json({ sucess: false, message: " Falha"})
+  }
+});
+
 module.exports = router;

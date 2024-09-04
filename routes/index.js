@@ -29,16 +29,6 @@ router.post('/singUp', async (req, res) => {
     email:email,
     userid:userId,
     avatar:avatar,
-    littes:"",
-    interece:"",
-    formacaoSuperior:"",
-    formacaomedio:"",
-    formacaoGrau:"",
-    areaFormacao:"",
-    desc:"",
-    facebook:"",
-    linkedin:"",
-    insta:"",
     })
     res.json({ success: true, message: "User created seccessfully!", userId: user._id})
   }

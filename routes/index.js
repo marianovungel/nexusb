@@ -131,9 +131,9 @@ router.post('/getAllDocs', async (req, res) => {
   }
 });
 
-router.post('/getUser', async (req, res) => {
+router.post('/getSingleUser', async (req, res) => {
   let { userId } = req.body;
-  let user = userModel.findById(userId)
+  let user = userModel.find({userid: userId})
   if(user){
     return res.json({ success: true, message: "Usuário Encontrado com Sucesso!", user: user});
   }else{

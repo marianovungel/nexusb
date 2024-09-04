@@ -2,7 +2,10 @@ var mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
     userid:String,
-    avatar:String,
+    avatar:{
+        type:String,
+        default: "https://w7.pngwing.com/pngs/81/570/png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo-thumbnail.png"
+    },
     name:String,
     email:String,
     phone:String,

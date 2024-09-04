@@ -15,7 +15,7 @@ const docSchema = new mongoose.Schema({
     autorPic:String,
     private:{
         type:Boolean,
-        default: true
+        default: false
     },
     date:{
         type:Date,

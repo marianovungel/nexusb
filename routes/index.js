@@ -66,20 +66,12 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/createDoc', async (req, res) => {
-  let { userId, docName} = req.body;
-  let user = userModel.findById(userId)
-
-  if(user){
-    let doc = await docModel.create({
-      uploadedBy: userId,
-      title: docName
-    })
-
+  try {
+    let doc = await docModel.create(req.body)
     return res.json({ success: true, message: "Documento criado com Sucesso!", docId: doc._id})
-  }else{
-    return res.json({ sucess: false, message: "Usuário Inválido"})
+  } catch (error) {
+    return res.json({ sucess: false, message: "Erro Aao criar o Documento"})
   }
-
 });
 
 router.post('/uploadDoc', async (req, res) => {

@@ -29,6 +29,13 @@ const io = require("socket.io")(server, {
   }
 })
 
+// app.use(cors())
+app.use((req, res, next)=>{
+  res.header("Access-Control-Allow-Origin", "/*");
+  res.header("Access-Control-Allow-Methods", 'GET,POST');
+  app.use(cors())
+  next();
+})
 app.use(cors())
 
 io.on('connection', (socket)=>{

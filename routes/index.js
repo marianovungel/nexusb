@@ -141,7 +141,7 @@ router.post('/use', async (req, res) => {
   }
 });
 
-router.get('/search:key', async (req, res) => {
+router.post('/search', async (req, res) => {
   try {
     const result = await userModel.aggregate(
       [
@@ -149,7 +149,7 @@ router.get('/search:key', async (req, res) => {
           $search: {
             index: "nexus",
             text: {
-              query: req.params.key,
+              query: req.body.key,
               path: {
                 wildcard: "*"
               }

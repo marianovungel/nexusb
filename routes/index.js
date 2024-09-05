@@ -151,7 +151,7 @@ router.post('/alldocs', async (req, res) => {
           $search: {
             index: "nexusdocs",
             text: {
-              query: req.body.userId,
+              query: "X9WJKQKW0nS3zPv0z8bKQQOQtLf1",
               path: {
                 wildcard: "*"
               }

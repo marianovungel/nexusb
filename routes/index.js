@@ -109,6 +109,14 @@ router.post('/getAllDocs', async (req, res) => {
     return res.json({ sucess: false, message: "Usuário Inválido"})
   }
 });
+router.post('/docxs', async (req, res) => {
+  if(user){
+    let docs = await docModel.find({private: false})
+    return res.json({ success: true, message: "Todos os documentos público", docs: docs});
+  }else{
+    return res.json({ sucess: false, message: "Usuário Inválido"})
+  }
+});
 
 router.post('/use', async (req, res) => {
   let { userId } = req.body;

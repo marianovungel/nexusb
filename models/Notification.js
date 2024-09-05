@@ -1,5 +1,9 @@
 var mongoose = require("mongoose")
 
+// 1- Não Foi Aceito
+// 2- Foi Aceito
+// 1- Solicitação
+
 const NotifySchema = new mongoose.Schema({
     usernotify:String,
     userNotificated:String,

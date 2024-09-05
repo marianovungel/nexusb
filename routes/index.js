@@ -5,6 +5,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var docModel = require('../models/docModel');
 var Notify = require('../models/Notification');
+const _ = require("underscore")
 
 const secret = "nexussecret"
 
@@ -115,7 +116,8 @@ router.post('/docxs', async (req, res) => {
   let user = userModel.findOne({userid: userId})
   if(user){
     let docs = await docModel.find({private: false})
-    return res.json({ success: true, message: "Todos os documentos público", docs: docs});
+    let shuffleDocs = _.shuffle(docs);
+    return res.json({ success: true, message: "Todos os documentos público", docs: shuffleDocs});
   }else{
     return res.json({ sucess: false, message: "Usuário Inválido"})
   }

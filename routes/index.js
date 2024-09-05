@@ -146,7 +146,7 @@ router.post('/search', async (req, res) => {
 router.post('/alldocs', async (req, res) => {
   try {
     const key = req.body.userId.toString();
-    const result = await userModel.aggregate(
+    const result = await docModel.aggregate(
       [
         {
           $search: {
@@ -161,7 +161,7 @@ router.post('/alldocs', async (req, res) => {
         }
       ]
     )
-    return res.json({ success: true, message: "Success!", users: key});
+    return res.json({ success: true, message: "Success!", users: result});
   } catch (error) {
     return res.json({ sucess: false, message: " Falha"})
   }

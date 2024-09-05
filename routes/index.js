@@ -191,5 +191,16 @@ router.post('/colaborar', async (req, res) => {
     return res.json({ sucess: false, message: " Falha"})
   }
 });
+router.post('/noticicadas', async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const allNotify = await Notify.find({userNotificated: userId})
+    
+    return res.json({ success: true, message: "Success!", notification: allNotify});
+  } catch (error) {
+    return res.json({ sucess: false, message: " Falha"})
+  }
+});
 
 module.exports = router;

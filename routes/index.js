@@ -110,6 +110,8 @@ router.post('/getAllDocs', async (req, res) => {
   }
 });
 router.post('/docxs', async (req, res) => {
+  let { userId } = req.body;
+  let user = userModel.findOne({userid: userId})
   if(user){
     let docs = await docModel.find({private: false})
     return res.json({ success: true, message: "Todos os documentos público", docs: docs});

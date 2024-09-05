@@ -109,16 +109,6 @@ router.post('/getAllDocs', async (req, res) => {
     return res.json({ sucess: false, message: "Usuário Inválido"})
   }
 });
-router.post('/alldocs', async (req, res) => {
-  let { userId } = req.body;
-  let user = userModel.findById({colab: userId})
-  if(user){
-    let docs = await docModel.find({uploadedBy: userId})
-    return res.json({ success: true, message: "Documents buscados com Sucesso!", docs: docs});
-  }else{
-    return res.json({ sucess: false, message: "Usuário Inválido"})
-  }
-});
 
 router.post('/use', async (req, res) => {
   let { userId } = req.body;
@@ -139,6 +129,29 @@ router.post('/search', async (req, res) => {
             index: "nexus",
             text: {
               query: req.body.key,
+              path: {
+                wildcard: "*"
+              }
+            }
+          }
+        }
+      ]
+    )
+    return res.json({ success: true, message: "Success!", users: result});
+  } catch (error) {
+    return res.json({ sucess: false, message: " Falha"})
+  }
+});
+
+router.post('/alldocs', async (req, res) => {
+  try {
+    const result = await userModel.aggregate(
+      [
+        {
+          $search: {
+            index: "nexusdocs",
+            text: {
+              query: req.body.userId,
               path: {
                 wildcard: "*"
               }

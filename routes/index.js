@@ -4,6 +4,7 @@ var userModel = require('../models/useModel');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var docModel = require('../models/docModel');
+var Notify = require('../models/Notification');
 
 const secret = "nexussecret"
 
@@ -172,6 +173,18 @@ router.post('/alldocs', async (req, res) => {
       ]
     )
     return res.json({ success: true, message: "Success!", users: result});
+  } catch (error) {
+    return res.json({ sucess: false, message: " Falha"})
+  }
+});
+router.post('/colaborar', async (req, res) => {
+  try {
+    // const {usernotify, userNotificated,  type, link, text, usernotifyName, ArtigoName} = req.body;
+    const newNotify = new Notify(req.body)
+
+    const notification = await newNotify.save()
+    
+    return res.json({ success: true, message: "Success!", notification: notification});
   } catch (error) {
     return res.json({ sucess: false, message: " Falha"})
   }

@@ -90,9 +90,9 @@ router.post('/getDoc', async (req, res) => {
 });
 router.post('/deleteDoc', async (req, res) => {
   let { userId, docId } = req.body;
-  let user = userModel.findById(userId)
+  let user = userModel.findOne({userid: userId})
   if(user){
-    let doc = await docModel.findByIdAndDelete(docId)
+    await docModel.findByIdAndDelete(docId)
     return res.json({ success: true, message: "Documento Deletado com Sucesso!"});
   }else{
     return res.json({ sucess: false, message: "Usuário Inválido"})

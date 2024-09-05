@@ -161,7 +161,7 @@ router.post('/alldocs', async (req, res) => {
         }
       ]
     )
-    return res.json({ success: true, message: "Success!", users: result});
+    return res.json({ success: true, message: "Success!", users: key});
   } catch (error) {
     return res.json({ sucess: false, message: " Falha"})
   }

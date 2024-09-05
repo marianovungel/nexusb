@@ -145,13 +145,14 @@ router.post('/search', async (req, res) => {
 
 router.post('/alldocs', async (req, res) => {
   try {
+    const key = req.body.userId.toString();
     const result = await userModel.aggregate(
       [
         {
           $search: {
             index: "nexusdocs",
             text: {
-              query: "X9WJKQKW0nS3zPv0z8bKQQOQtLf1",
+              query: key,
               path: {
                 wildcard: "*"
               }

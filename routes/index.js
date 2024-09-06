@@ -218,9 +218,8 @@ router.post('/aceptcolab', async (req, res) => {
     const { colaborador, docId } = req.body;
 
     const doc = await docModel.findById(docId)
-    const user = await userModel.findById(colaborador)
 
-    if(doc && user){
+    if(doc){
       return res.json({ success: true, message: "Solicitação Recusada!", data: doc});
     }
 

@@ -220,11 +220,18 @@ router.post('/aceptcolab', async (req, res) => {
     const doc = await docModel.findById(docId)
 
     if(doc){
-      return res.json({ success: true, message: "Solicitação Recusada!", data: doc});
+      var verifyInclud = doc.colab;
+      var GetConfirn = verifyInclud.includes(colaborador);
+
+      if(!GetConfirn){
+
+        const inserirUser = await docModel.findByIdAndUpdate(
+          { $push: { colab: colaborador } }
+        )
+        return res.json({ success: true, message: "Solicitação Recusada!", data: inserirUser});
+      }
+
     }
-
-
-
     // await Notify.findByIdAndDelete(notifyId)
     
   } catch (error) {

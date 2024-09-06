@@ -202,5 +202,16 @@ router.post('/noticicadas', async (req, res) => {
     return res.json({ sucess: false, message: " Falha"})
   }
 });
+router.post('/reject', async (req, res) => {
+  try {
+    const { notifyId } = req.body;
+
+    await Notify.findByIdAndDelete(notifyId)
+    
+    return res.json({ success: true, message: "Solicitação Recusada!"});
+  } catch (error) {
+    return res.json({ sucess: false, message: " Falha"})
+  }
+});
 
 module.exports = router;

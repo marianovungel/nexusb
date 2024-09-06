@@ -229,7 +229,7 @@ router.post('/aceptcolab', async (req, res) => {
     // await Notify.findByIdAndDelete(notifyId)
     
   } catch (error) {
-    return res.json({ sucess: false, message: " Falha"})
+    return res.json({ sucess: false, message: error})
   }
 });
 

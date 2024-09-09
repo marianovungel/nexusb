@@ -78,19 +78,13 @@ router.post('/uploadDoc', async (req, res) => {
 });
 
 router.post('/getDoc', async (req, res) => {
-  let { userId, docId } = req.body;
-  let user = userModel.findById(userId)
-  if(user){
+  let { docId } = req.body;
     let doc = await docModel.findById(docId)
     if(doc){
-      return res.json({ success: true, message: "Documento atualizado com Sucesso!", doc: doc});
+      return res.json({ success: true, message: "Documento  Get com sucesso!", doc: doc});
     }else{
       return res.json({ sucess: false, message: "Documento Inválido"})
     }
-  }else{
-    return res.json({ sucess: false, message: "Usuário Inválido"})
-  }
-
 });
 router.post('/deleteDoc', async (req, res) => {
   let { userId, docId } = req.body;

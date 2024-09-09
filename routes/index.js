@@ -196,8 +196,10 @@ router.post('/noticicadas', async (req, res) => {
     const { userId } = req.body;
 
     const allNotify = await Notify.find({userNotificated: userId})
+
+    const allNotifyReverse = allNotify.reverse()
     
-    return res.json({ success: true, message: "Success!", notification: allNotify});
+    return res.json({ success: true, message: "Success!", notification: allNotifyReverse});
   } catch (error) {
     return res.json({ sucess: false, message: " Falha"})
   }

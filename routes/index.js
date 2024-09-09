@@ -215,7 +215,7 @@ router.post('/reject', async (req, res) => {
 });
 router.post('/aceptcolab', async (req, res) => {
   try {
-    const { colaborador, docId } = req.body;
+    const { colaborador, docId, notifyId } = req.body;
 
     const doc = await docModel.findById(docId)
 
@@ -224,15 +224,19 @@ router.post('/aceptcolab', async (req, res) => {
       var GetConfirn = verifyInclud.includes(colaborador);
 
       if(!GetConfirn){
-
         const inserirUser = await docModel.findByIdAndUpdate(
+          docId,
           { $push: { colab: colaborador } }
         )
+
+        await Notify.findByIdAndDelete(notifyId)
+
         return res.json({ success: true, message: "Solicitação Recusada!", data: inserirUser});
       }
-
+      
+      return res.json({ success: true, message: "Colaborador já Adicionado previamente...", data: doc});
     }
-    // await Notify.findByIdAndDelete(notifyId)
+    return res.json({ success: true, message: "Dovumento não encontrado.",});
     
   } catch (error) {
     return res.json({ sucess: false, message: error})

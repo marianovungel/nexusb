@@ -64,12 +64,14 @@ router.post('/createDoc', async (req, res) => {
 });
 
 router.post('/uploadDoc', async (req, res) => {
-  let { userId, docId, content} = req.body;
-  let user = userModel.findById(userId)
-  if(user){
-    let doc = await docModel.findByIdAndUpdate(docId, {content: content})
+  try {
+    let { userId, docId, content} = req.body;
+    if(userId){
+      await docModel.findByIdAndUpdate(docId, {content: content})
+    }
     return res.json({ success: true, message: "Documento atualizado com Sucesso!"})
-  }else{
+    
+  } catch (error) {
     return res.json({ sucess: false, message: "Usuário Inválido"})
   }
 

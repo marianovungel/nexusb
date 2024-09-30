@@ -5,6 +5,10 @@ const GrupSchema = new mongoose.Schema({
     membros:Array,
     desc:String,
     adm:String,
+    admPic:String,
+    admName:String,
+    admDesc:String,
+    pic:String,
     date:{
         type:Date,
         default: Date.now

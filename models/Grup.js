@@ -4,6 +4,7 @@ const GrupSchema = new mongoose.Schema({
     name:String,
     membros:Array,
     desc:String,
+    adm:String,
     date:{
         type:Date,
         default: Date.now

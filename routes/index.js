@@ -5,6 +5,7 @@ var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var docModel = require('../models/docModel');
 var Notify = require('../models/Notification');
+var Grup = require('../models/Grup');
 const _ = require("underscore")
 
 const secret = "nexussecret"
@@ -58,6 +59,14 @@ router.post('/createDoc', async (req, res) => {
   try {
     let doc = await docModel.create(req.body)
     return res.json({ success: true, message: "Documento criado com Sucesso!", docId: doc._id})
+  } catch (error) {
+    return res.json({ sucess: false, message: "Erro Aao criar o Documento"})
+  }
+});
+router.post('/creategrup', async (req, res) => {
+  try {
+    let grupo = await Grup.create(req.body)
+    return res.json({ success: true, message: "Grupo criado com Sucesso!", grupoId: grupo})
   } catch (error) {
     return res.json({ sucess: false, message: "Erro Aao criar o Documento"})
   }

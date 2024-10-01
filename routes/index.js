@@ -71,6 +71,15 @@ router.post('/creategrup', async (req, res) => {
     return res.json({ sucess: false, message: "Erro Aao criar o Documento"})
   }
 });
+router.post('/getGrup', async (req, res) => {
+  let { grupId } = req.body;
+    let aGrup = await Grup.findById(grupId)
+    if(aGrup){
+      return res.json({ success: true, message: "Grupo  Encontrado com sucesso!", grupo: aGrup});
+    }else{
+      return res.json({ sucess: false, message: "Grupo Inválido"})
+    }
+});
 
 router.post('/uploadDoc', async (req, res) => {
   try {

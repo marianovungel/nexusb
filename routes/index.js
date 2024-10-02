@@ -163,8 +163,9 @@ router.post('/docxs', async (req, res) => {
 router.post('/use', async (req, res) => {
   let { userId } = req.body;
   let user = await userModel.findOne({ userid: userId });
+  const allNotify = await Notify.find({userNotificated: userId})
   if(user){
-    return res.json({ success: true, message: "Usuário Encontrado com Sucesso!", user: user});
+    return res.json({ success: true, message: "Usuário Encontrado com Sucesso!", user: user, notifyNum: allNotify.length});
   }else{
     return res.json({ sucess: false, message: "Usuário Inválido"})
   }

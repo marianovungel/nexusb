@@ -80,6 +80,29 @@ router.post('/getGrup', async (req, res) => {
       return res.json({ sucess: false, message: "Grupo Inválido"})
     }
 });
+router.post('/mygrups', async (req, res) => {
+  try {
+    const key = req.body.userId.toString();
+    const result = await docModel.aggregate(
+      [
+        {
+          $search: {
+            index: "default",
+            text: {
+              query: key,
+              path: {
+                wildcard: "*"
+              }
+            }
+          }
+        }
+      ]
+    )
+    return res.json({ success: true, message: "Success!", users: result});
+  } catch (error) {
+    return res.json({ sucess: false, message: " Falha"})
+  }
+});
 
 router.post('/uploadDoc', async (req, res) => {
   try {

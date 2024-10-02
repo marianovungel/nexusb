@@ -83,7 +83,7 @@ router.post('/getGrup', async (req, res) => {
 router.post('/mygrups', async (req, res) => {
   try {
     const key = req.body.userId.toString();
-    const result = await docModel.aggregate(
+    const result = await Grup.aggregate(
       [
         {
           $search: {
@@ -98,7 +98,7 @@ router.post('/mygrups', async (req, res) => {
         }
       ]
     )
-    return res.json({ success: true, message: "Success!", users: result});
+    return res.json({ success: true, message: "Success!", result: result});
   } catch (error) {
     return res.json({ sucess: false, message: " Falha"})
   }

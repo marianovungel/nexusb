@@ -1,6 +1,8 @@
 var mongoose = require("mongoose")
 
 const docSchema = new mongoose.Schema({
+    _id:String,
+    data:Object,
     title:String,
     resumo:String,
     content:{
